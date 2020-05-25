@@ -1,0 +1,79 @@
+{
+  "name": "Snippet",
+  "fields": [
+    {
+      "fieldName": "code",
+      "fieldType": "String",
+      "fieldValidateRules": [
+        "required"
+      ]
+    },
+    {
+      "fieldName": "libelle",
+      "fieldType": "String",
+      "fieldValidateRules": [
+        "required"
+      ]
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String",
+      "fieldValidateRules": [
+        "required"
+      ]
+    },
+    {
+      "fieldName": "textCode",
+      "fieldType": "String",
+      "fieldValidateRules": [
+        "required"
+      ]
+    },
+    {
+      "fieldName": "creationDate",
+      "fieldType": "Instant",
+      "fieldValidateRules": [
+        "required"
+      ]
+    },
+    {
+      "fieldName": "lastModifiedDate",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "actif",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "gitlabExternalCode",
+      "fieldType": "Long"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "category",
+      "otherEntityRelationshipName": "snippet",
+      "relationshipName": "categoryCd",
+      "otherEntityField": "id"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "tag",
+      "otherEntityRelationshipName": "snippet",
+      "relationshipName": "tagCd",
+      "otherEntityField": "id"
+    }
+  ],
+  "changelogDate": "20200525114431",
+  "entityTableName": "snippet",
+  "dto": "no",
+  "pagination": "infinite-scroll",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

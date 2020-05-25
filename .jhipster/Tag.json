@@ -1,0 +1,46 @@
+{
+  "name": "Tag",
+  "fields": [
+    {
+      "fieldName": "tagCd",
+      "fieldType": "String",
+      "fieldValidateRules": [
+        "required"
+      ]
+    },
+    {
+      "fieldName": "tagDesc",
+      "fieldType": "String",
+      "fieldValidateRules": [
+        "required"
+      ]
+    },
+    {
+      "fieldName": "creationDate",
+      "fieldType": "Instant",
+      "fieldValidateRules": [
+        "required"
+      ]
+    },
+    {
+      "fieldName": "lastModifiedDate",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "actif",
+      "fieldType": "Boolean"
+    }
+  ],
+  "relationships": [],
+  "changelogDate": "20200525114631",
+  "entityTableName": "tag",
+  "dto": "no",
+  "pagination": "infinite-scroll",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

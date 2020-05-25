@@ -1,0 +1,46 @@
+{
+  "name": "Category",
+  "fields": [
+    {
+      "fieldName": "categoryCd",
+      "fieldType": "String",
+      "fieldValidateRules": [
+        "required"
+      ]
+    },
+    {
+      "fieldName": "categoryDesc",
+      "fieldType": "String",
+      "fieldValidateRules": [
+        "required"
+      ]
+    },
+    {
+      "fieldName": "creationDate",
+      "fieldType": "Instant",
+      "fieldValidateRules": [
+        "required"
+      ]
+    },
+    {
+      "fieldName": "lastModifiedDate",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "actif",
+      "fieldType": "Boolean"
+    }
+  ],
+  "relationships": [],
+  "changelogDate": "20200525114531",
+  "entityTableName": "category",
+  "dto": "no",
+  "pagination": "infinite-scroll",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

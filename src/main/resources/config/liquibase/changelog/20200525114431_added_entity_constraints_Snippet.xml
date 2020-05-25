@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.9.xsd">
+    <!--
+        Added the constraints for entity Snippet.
+    -->
+    <changeSet id="20200525114431-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="category_cd_id"
+                                 baseTableName="snippet"
+                                 constraintName="fk_snippet_category_cd_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="category"/>
+
+        <addForeignKeyConstraint baseColumnNames="tag_cd_id"
+                                 baseTableName="snippet"
+                                 constraintName="fk_snippet_tag_cd_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="tag"/>
+
+    </changeSet>
+</databaseChangeLog>

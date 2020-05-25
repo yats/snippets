@@ -1,0 +1,42 @@
+entity Snippet {
+	code String required,
+    libelle String required, 
+    description String required,
+    textCode String required,
+    creationDate Instant required, 
+    lastModifiedDate Instant,
+    actif Boolean,
+    gitlabExternalCode Long
+}
+
+entity Category {
+	categoryCd String required, 
+    categoryDesc String required,
+    creationDate Instant required, 
+    lastModifiedDate Instant,
+    actif Boolean
+}
+
+entity Tag {
+	tagCd String required, 
+    tagDesc String required,
+    creationDate Instant required, 
+    lastModifiedDate Instant,
+    actif Boolean
+}
+
+relationship ManyToOne {
+	Snippet{categoryCd} to Category,
+    Snippet{tagCd} to Tag,
+}
+
+paginate Snippet, Category, Tag with infinite-scroll
+
+// Use Data Transfert Objects (DTO)
+// dto * with mapstruct
+
+// Set service options to all except few
+service all with serviceImpl
+
+// Set an angular suffix
+// angularSuffix * with mySuffix
