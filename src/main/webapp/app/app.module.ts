@@ -7,6 +7,7 @@ import { SnippetsCoreModule } from 'app/core/core.module';
 import { SnippetsAppRoutingModule } from './app-routing.module';
 import { SnippetsHomeModule } from './home/home.module';
 import { SnippetsEntityModule } from './entities/entity.module';
+import { SnippetsAppSnippetsManagementModule } from './snippets-management/snippets-management.module';
 // jhipster-needle-angular-add-module-import JHipster will add new module here
 import { MainComponent } from './layouts/main/main.component';
 import { NavbarComponent } from './layouts/navbar/navbar.component';
@@ -20,6 +21,7 @@ import { ErrorComponent } from './layouts/error/error.component';
     SnippetsSharedModule,
     SnippetsCoreModule,
     SnippetsHomeModule,
+    SnippetsAppSnippetsManagementModule,
     // jhipster-needle-angular-add-module JHipster will add new module here
     SnippetsEntityModule,
     SnippetsAppRoutingModule,
