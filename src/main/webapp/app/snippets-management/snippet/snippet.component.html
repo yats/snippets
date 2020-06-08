@@ -1,0 +1,145 @@
+<div>
+    <div>
+        <br>
+
+        <h3>Criteria</h3>
+        <div class="ui-fluid p-formgrid p-grid">
+            <div class="p-field p-col">
+                <label for="float-input">Code</label>
+                <input type="text" size="30" pInputText styleClass="wid20" id="code" [(ngModel)]="searchQuery.code">
+            </div>
+            <div class="p-field p-col">
+                <label for="float-input">Description</label>
+                <input type="text" size="30" pInputText id="code" [(ngModel)]="searchQuery.description">
+            </div>
+            <div class="p-field p-col">
+                <label for="float-input">Code Gitlab</label>
+                <input type="text" size="30" pInputText id="code" [(ngModel)]="searchQuery.externalCode">
+            </div>
+            <div class="p-field p-col">
+                <label for="float-input">Contenu</label>
+                <input type="text" size="30" pInputText id="code" [(ngModel)]="searchQuery.content">
+            </div>
+        </div>
+
+        <br>
+        <h3>Categories</h3>
+        <span class="ui-fluid">
+            <p-autoComplete [(ngModel)]="searchQuery.categories" [suggestions]="filteredCategories" (completeMethod)="getAllCategories($event)"
+                styleClass="wid100" [minLength]="1" placeholder="Categories" field="name" [multiple]="true">
+            </p-autoComplete>
+        </span>
+
+    </div>
+    <h2 id="page-heading">
+        <br>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-snippet"
+            [routerLink]="['/snippet/new']">
+            <fa-icon icon="plus"></fa-icon>
+            <span>
+                Create a new Snippet
+            </span>
+        </button>
+        <button id="jh-synchronize-entity" class="btn btn-warning float-right jh-create-entity synchronize-snippet"
+            [routerLink]="['/snippet/synchronize']">
+            <fa-icon icon="search"></fa-icon>
+            <span>
+                Synchronize
+            </span>
+        </button>
+        <button id="jh-search-entity" class="btn btn-info float-right jh-create-entity search-snippet"
+            [routerLink]="['/snippet/search']">
+            <fa-icon icon="search"></fa-icon>
+            <span>
+                Search
+            </span>
+        </button>
+    </h2>
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+
+    <div class="alert alert-warning" id="no-result" *ngIf="snippets?.length === 0">
+        <span>No snippets found</span>
+    </div>
+
+    <div class="table-responsive" id="entities" *ngIf="snippets && snippets.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="reset.bind(this)">
+                    <th scope="col" jhiSortBy="code"><span>Code</span>
+                        <fa-icon icon="sort"></fa-icon>
+                    </th>
+                    <th scope="col" jhiSortBy="libelle"><span>Libelle</span>
+                        <fa-icon icon="sort"></fa-icon>
+                    </th>
+                    <th scope="col" jhiSortBy="description"><span>Description</span>
+                        <fa-icon icon="sort"></fa-icon>
+                    </th>
+                    <th scope="col" jhiSortBy="textCode"><span>Text Code</span>
+                        <fa-icon icon="sort"></fa-icon>
+                    </th>
+                    <th scope="col" jhiSortBy="actif"><span>Actif</span>
+                        <fa-icon icon="sort"></fa-icon>
+                    </th>
+                    <th scope="col" jhiSortBy="gitlabExternalCode"><span>Gitlab External Code</span>
+                        <fa-icon icon="sort"></fa-icon>
+                    </th>
+                    <th scope="col" jhiSortBy="categoryCd.categoryDesc"><span>Category Cd</span>
+                        <fa-icon icon="sort"></fa-icon>
+                    </th>
+                    <th scope="col" jhiSortBy="tagCd.tagDesc"><span>Tag Cd</span>
+                        <fa-icon icon="sort"></fa-icon>
+                    </th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']"
+                [infiniteScrollDistance]="0">
+                <tr *ngFor="let snippet of snippets ;trackBy: trackId">
+                    <td><a [routerLink]="['/snippet', snippet.id, 'view']">{{ snippet.id }}</a></td>
+                    <td>{{ snippet.code }}</td>
+                    <td>{{ snippet.libelle }}</td>
+                    <td>{{ snippet.description }}</td>
+                    <td>{{ snippet.textCode }}</td>
+                    <td>{{ snippet.creationDate | date:'medium' }}</td>
+                    <td>{{ snippet.lastModifiedDate | date:'medium' }}</td>
+                    <td>{{ snippet.actif }}</td>
+                    <td>{{ snippet.gitlabExternalCode }}</td>
+                    <td>
+                        <div *ngIf="snippet.categoryCd">
+                            <a
+                                [routerLink]="['/category', snippet.categoryCd?.id, 'view']">{{ snippet.categoryCd?.id }}</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div *ngIf="snippet.tagCd">
+                            <a [routerLink]="['/tag', snippet.tagCd?.id, 'view']">{{ snippet.tagCd?.id }}</a>
+                        </div>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <button type="submit" [routerLink]="['/snippet', snippet.id, 'view']"
+                                class="btn btn-info btn-sm">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline">View</span>
+                            </button>
+
+                            <button type="submit" [routerLink]="['/snippet', snippet.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                                <fa-icon icon="pencil-alt"></fa-icon>
+                                <span class="d-none d-md-inline">Edit</span>
+                            </button>
+
+                            <button type="submit" (click)="delete(snippet)" class="btn btn-danger btn-sm">
+                                <fa-icon icon="times"></fa-icon>
+                                <span class="d-none d-md-inline">Delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

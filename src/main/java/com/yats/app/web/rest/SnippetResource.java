@@ -111,6 +111,7 @@ public class SnippetResource {
         return ResponseUtil.wrapOrNotFound(snippet);
     }
 
+
     /**
      * {@code DELETE  /snippets/:id} : delete the "id" snippet.
      *
